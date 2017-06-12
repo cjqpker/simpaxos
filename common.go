@@ -61,7 +61,7 @@ func sleepRandomLong() {
 }
 
 func sleepLong() {
-	time.Sleep(time.Second * 5)
+	time.Sleep(time.Second * 3)
 }
 
 // getDuration
@@ -74,6 +74,10 @@ func getLottery() bool {
 }
 
 func print() {
+	if !printProgress {
+		return
+	}
+
 	pLock.Lock()
 	defer pLock.Unlock()
 

@@ -125,9 +125,13 @@ func (a *acceptor) check() {
 }
 
 //accepted whether accepted a proposal or not
-func (a *acceptor) accepted() (bool, int) {
+func (a *acceptor) accepted(r int) (bool, int) {
 	a.lock.Lock()
 	a.lock.Unlock()
+
+	if a.round != r {
+		return false, 0
+	}
 
 	if a.cv != 0 {
 		return true, a.cv
@@ -136,11 +140,11 @@ func (a *acceptor) accepted() (bool, int) {
 	return false, 0
 }
 
-func countAccepted() (int, int) {
+func countAccepted(r int) (int, int) {
 	amt := 0
 	vret := 0
 	for _, a := range acceptors {
-		if accepted, v := a.accepted(); accepted {
+		if accepted, v := a.accepted(r); accepted {
 			amt++
 			vret = v
 		}

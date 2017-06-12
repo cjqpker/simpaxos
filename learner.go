@@ -21,7 +21,7 @@ func (l *learner) check() {
 	l.lock.Lock()
 	defer l.lock.Unlock()
 
-	if amt, v := countAccepted(); amt > acceptorAmount/2 {
+	if amt, v := countAccepted(l.round); amt > acceptorAmount/2 {
 		fmt.Printf("Consensus achieved: %d\n", v)
 		l.reset()
 	}
