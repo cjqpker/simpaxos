@@ -6,9 +6,11 @@ const (
 	learnerAmount  = 1
 
 	sleepDuration     = 1000 // loop wait, set larger when you want to see the progress
-	lotteryDifficulty = 5    // rate for node's random recovery, more offen when smaller
+	lotteryDifficulty = 100  // rate for node's random recovery, more offen when smaller
 
 	printProgress = true
+
+	broadcastRate float32 = 0.6
 )
 
 var (

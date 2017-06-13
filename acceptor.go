@@ -140,17 +140,15 @@ func (a *acceptor) accepted(r int) (bool, int) {
 	return false, 0
 }
 
-func countAccepted(r int) (int, int) {
-	amt := 0
-	vret := 0
+func countAccepted(r int) map[int]int {
+	acceptedVMap := map[int]int{}
 	for _, a := range acceptors {
 		if accepted, v := a.accepted(r); accepted {
-			amt++
-			vret = v
+			acceptedVMap[v] = acceptedVMap[v] + 1
 		}
 	}
 
-	return amt, vret
+	return acceptedVMap
 }
 
 func (a *acceptor) run() {

@@ -21,9 +21,14 @@ func (l *learner) check() {
 	l.lock.Lock()
 	defer l.lock.Unlock()
 
-	if amt, v := countAccepted(l.round); amt > acceptorAmount/2 {
-		fmt.Printf("Consensus achieved: %d\n", v)
-		l.reset()
+	acceptedVMap := countAccepted(l.round)
+
+	for k, v := range acceptedVMap {
+		if v > acceptorAmount/2 {
+			fmt.Printf("Consensus achieved: %d\n", k)
+			l.reset()
+			break
+		}
 	}
 }
 

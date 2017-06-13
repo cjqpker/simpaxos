@@ -55,8 +55,9 @@ func (p *proposer) run() {
 // restart when get no promise from only one the acceptors
 func (p *proposer) sendPrepare() {
 	randomIndex := randomIndex(acceptorAmount)
-	for _, index := range randomIndex {
-		a := acceptors[index]
+	totalBroadcast := float32(acceptorAmount) * broadcastRate
+	for i := 0; i < int(totalBroadcast); i++ {
+		a := acceptors[randomIndex[i]]
 		sleepRandomShort()
 
 		promised, _, cv := a.prepare(p.round, p.n)

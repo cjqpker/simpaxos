@@ -57,7 +57,7 @@ func sleepRandomShort() {
 }
 
 func sleepRandomLong() {
-	time.Sleep(getDuration() * 10)
+	time.Sleep(getDuration() * 5)
 }
 
 func sleepLong() {
